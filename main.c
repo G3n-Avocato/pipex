@@ -6,7 +6,7 @@
 /*   By: lamasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 17:47:41 by lamasson          #+#    #+#             */
-/*   Updated: 2023/03/16 17:43:56 by lamasson         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:09:38 by lamasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_check_fdout(t_context context)
 	return (1);
 }
 
-int	main(int argc, char **argv, char *env[])
+int	main(int argc, char **argv, char **env)
 {
 	t_context	context;
 	int			i;
@@ -50,6 +50,10 @@ int	main(int argc, char **argv, char *env[])
 	context.argc = argc;
 	context.argv = argv;
 	context.env = env;
+	i = 0;
+	while (context.env[i])
+		i++;
+	context.env[i - 1] = NULL;
 	if (argc != 5)
 	{
 		ft_putendl_fd("Wrong input", 1);
