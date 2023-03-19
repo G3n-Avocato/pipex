@@ -6,7 +6,7 @@
 /*   By: lamasson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 17:49:29 by lamasson          #+#    #+#             */
-/*   Updated: 2023/03/18 18:13:25 by lamasson         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:34:01 by lamasson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,15 @@ char	*ft_get_path(char *cmd, char *env[])
 		return (ft_strdup(cmd));
 	while (env[i] != NULL && ft_strncmp(env[i], "PATH", 4) != 0)
 		i++;
-//	if (env[i] == NULL)
-//		ft_putendl_fd(": command not found", 2);
+	if (env[i] == NULL)
+		return (env[i]);
 	size = ft_strlen(env[i]);
-	ft_putnbr_fd(size, 2);
 	way_path = ft_substr(env[i], 5, size);
 	tab = ft_split(way_path, ':');
 	free(way_path);
-	i = 0;
-	while (tab[i] != NULL)
-	{
+	i = -1;
+	while (tab[++i] != NULL)
 		tab[i] = ft_strjoin_pipe(tab[i], cmd);
-		i++;
-	}
 	way_path = NULL;
 	way_path = ft_access_path(tab, cmd);
 	ft_free_tab(tab);
